@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BoostX - Top Up Game</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/css/index.css">
+    <script src="/static/js/transitions.js"></script>
+    <script src="/static/js/search.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const topUpButtons = document.querySelectorAll('button');
+            topUpButtons.forEach(button => {
+                if (button.textContent === 'TOP UP') {
+                    button.addEventListener('click', function() {
+                        window.location.href = '/comming_soon.html';
+                    });
+                }
+            });
+        });
+    </script>
+</head>
+<body class="min-h-screen">
+    <header class="bg-[#1a1a2e] py-4 px-6 fixed w-full top-0 z-50">
+        <nav class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="/index.html" class="logo w-24 h-8">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 32" class="w-full h-full">
+                        <text x="0" y="24" fill="white" font-family="Arial" font-weight="bold" font-size="24">
+                            Boost<tspan fill="#ff6b00">X</tspan>
+                        </text>
+                    </svg>
+                </a>
+                <div class="search-bar relative flex-1 max-w-xl mx-4">
+                    <input type="text" placeholder="Cari di BoostX..." class="w-full bg-[#252547] text-white rounded-lg py-2 px-4 pl-10">
+                    <svg class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="region w-8 h-8 rounded-full overflow-hidden">
+                        <img src="/assets/images/flag-id.avif" alt="Indonesia flag" class="w-full h-full object-cover">
+                    </div>
+                    <span class="text-white">ID</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 pt-24 pb-8">
+        <div class="categories flex items-center justify-start gap-4 md:gap-8 mb-8 text-white/80 whitespace-nowrap">
+            <a href="/index.html" class="hover:text-white">Game Seluler</a>
+            <a href="/game_pc.html" class="hover:text-white">Game PC</a>
+            <a href="/battle_royale.html" class="hover:text-white">Battle Royale</a>
+            <a href="/game_lokal.html" class="border-b-2 border-orange-500 pb-2 font-medium">Game Lokal</a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dragon Nest Card -->
+            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden">
+                <div class="aspect-square bg-white/10 relative overflow-hidden">
+                    <img src="/assets/images/DragonNest.jpg" alt="Dragon Nest" class="absolute inset-0 w-full h-full object-cover">
+                </div>
+                <div class="p-4">
+                    <div class="text-sm text-gray-400">Tencent</div>
+                    <div class="text-white font-medium mb-2">DragonNest:Silent Gods</div>
+                    <div class="text-sm text-gray-400 mb-4">Starting from</div>
+                    <div class="flex items-center justify-between">
+                        <div class="text-orange-500 font-medium">IDR 20.500</div>
+                        <button class="bg-[#252547] text-white px-4 py-1 rounded-lg text-sm">TOP UP</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metal Slug Card -->
+            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden">
+                <div class="aspect-square bg-white/10 relative overflow-hidden">
+                    <img src="/assets/images/Metal_Slug.jpg" alt="Metal Slug" class="absolute inset-0 w-full h-full object-cover">
+                </div>
+                <div class="p-4">
+                    <div class="text-sm text-gray-400">VNGGAMES</div>
+                    <div class="text-white font-medium mb-2">Metal Slug: Awakening</div>
+                    <div class="text-sm text-gray-400 mb-4">Starting from</div>
+                    <div class="flex items-center justify-between">
+                        <div class="text-orange-500 font-medium">IDR 15.000</div>
+                        <button class="bg-[#252547] text-white px-4 py-1 rounded-lg text-sm">TOP UP</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ragnarok Online Card -->
+            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden">
+                <div class="aspect-square bg-white/10 relative overflow-hidden">
+                    <img src="/assets/images/Ragnarok2.jpg" alt="Ragnarok Online" class="absolute inset-0 w-full h-full object-cover">
+                </div>
+                <div class="p-4">
+                    <div class="text-sm text-gray-400">Gravity</div>
+                    <div class="text-white font-medium mb-2">Ragnarok Online</div>
+                    <div class="text-sm text-gray-400 mb-4">Starting from</div>
+                    <div class="flex items-center justify-between">
+                        <div class="text-orange-500 font-medium">IDR 18.000</div>
+                        <button class="bg-[#252547] text-white px-4 py-1 rounded-lg text-sm">TOP UP</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Point Blank Card -->
+            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden">
+                <div class="aspect-square bg-white/10 relative overflow-hidden">
+                    <img src="/assets/images/Point_Blank2.jpg" alt="Point Blank" class="absolute inset-0 w-full h-full object-cover">
+                </div>
+                <div class="p-4">
+                    <div class="text-sm text-gray-400">Zepetto</div>
+                    <div class="text-white font-medium mb-2">Point Blank</div>
+                    <div class="text-sm text-gray-400 mb-4">Starting from</div>
+                    <div class="flex items-center justify-between">
+                        <div class="text-orange-500 font-medium">IDR 10.000</div>
+                        <button class="bg-[#252547] text-white px-4 py-1 rounded-lg text-sm">TOP UP</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lost Saga Card -->
+            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden">
+                <div class="aspect-square bg-white/10 relative overflow-hidden">
+                    <img src="/assets/images/Lost_Saga2.jpg" alt="Lost Saga" class="absolute inset-0 w-full h-full object-cover">
+                </div>
+                <div class="p-4">
+                    <div class="text-sm text-gray-400">Gemscool</div>
+                    <div class="text-white font-medium mb-2">Lost Saga</div>
+                    <div class="text-sm text-gray-400 mb-4">Starting from</div>
+                    <div class="flex items-center justify-between">
+                        <div class="text-orange-500 font-medium">IDR 12.000</div>
+                        <button class="bg-[#252547] text-white px-4 py-1 rounded-lg text-sm">TOP UP</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dreadout Card -->
+            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden">
+                <div class="aspect-square bg-white/10 relative overflow-hidden">
+                    <img src="/assets/images/Dreadout.jpg" alt="Dreadout" class="absolute inset-0 w-full h-full object-cover">
+                </div>
+                <div class="p-4">
+                    <div class="text-sm text-gray-400">Digital Happiness</div>
+                    <div class="text-white font-medium mb-2">Dreadout</div>
+                    <div class="text-sm text-gray-400 mb-4">Starting from</div>
+                    <div class="flex items-center justify-between">
+                        <div class="text-orange-500 font-medium">IDR 75.000</div>
+                        <button class="bg-[#252547] text-white px-4 py-1 rounded-lg text-sm">TOP UP</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pamali Card -->
+            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden">
+                <div class="aspect-square bg-white/10 relative overflow-hidden">
+                    <img src="/assets/images/Pamali.jpg" alt="Pamali" class="absolute inset-0 w-full h-full object-cover">
+                </div>
+                <div class="p-4">
+                    <div class="text-sm text-gray-400">StoryTale Studios</div>
+                    <div class="text-white font-medium mb-2">Pamali</div>
+                    <div class="text-sm text-gray-400 mb-4">Starting from</div>
+                    <div class="flex items-center justify-between">
+                        <div class="text-orange-500 font-medium">IDR 60.000</div>
+                        <button class="bg-[#252547] text-white px-4 py-1 rounded-lg text-sm">TOP UP</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Celestian Tales Card -->
+            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden">
+                <div class="aspect-square bg-white/10 relative overflow-hidden">
+                    <img src="/assets/images/CT.jpg" alt="Celestian Tales" class="absolute inset-0 w-full h-full object-cover">
+                </div>
+                <div class="p-4">
+                    <div class="text-sm text-gray-400">Ekuator Games</div>
+                    <div class="text-white font-medium mb-2">Celestian Tales</div>
+                    <div class="text-sm text-gray-400 mb-4">Starting from</div>
+                    <div class="flex items-center justify-between">
+                        <div class="text-orange-500 font-medium">IDR 50.000</div>
+                        <button class="bg-[#252547] text-white px-4 py-1 rounded-lg text-sm">TOP UP</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coffee Talk Card -->
+            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden">
+                <div class="aspect-square bg-white/10 relative overflow-hidden">
+                    <img src="/assets/images/Coffee_Talk.jpg" alt="Coffee Talk" class="absolute inset-0 w-full h-full object-cover">
+                </div>
+                <div class="p-4">
+                    <div class="text-sm text-gray-400">Toge Productions</div>
+                    <div class="text-white font-medium mb-2">Coffee Talk</div>
+                    <div class="text-sm text-gray-400 mb-4">Starting from</div>
+                    <div class="flex items-center justify-between">
+                        <div class="text-orange-500 font-medium">IDR 45.000</div>
+                        <button class="bg-[#252547] text-white px-4 py-1 rounded-lg text-sm">TOP UP</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon - BoostX</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/index.css">
+</head>
+<body class="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <!-- Animated SVG Background -->
+    <div class="absolute inset-0 z-0">
+        <svg class="absolute top-0 left-0 w-full h-full opacity-5" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <defs>
+                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:var(--color-accent);stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:var(--bg-input);stop-opacity:1" />
+                </linearGradient>
+            </defs>
+            <path d="M0,0 L100,0 L50,100 Z" fill="url(#grad1)">
+                <animate attributeName="d" dur="8s" repeatCount="indefinite"
+                    values="M0,0 L100,0 L50,100 Z; M10,0 L90,10 L50,90 Z; M0,0 L100,0 L50,100 Z"
+                    calcMode="spline" keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
+            </path>
+        </svg>
+        <svg class="absolute bottom-0 right-0 w-full h-full opacity-5" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path d="M100,100 L0,100 L50,0 Z" fill="var(--bg-card)">
+                <animate attributeName="d" dur="6s" repeatCount="indefinite"
+                    values="M100,100 L0,100 L50,0 Z; M90,100 L10,90 L50,10 Z; M100,100 L0,100 L50,0 Z"
+                    calcMode="spline" keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
+            </path>
+        </svg>
+    </div>
+
+    <!-- Main Content -->
+    <div class="relative z-10 text-center p-8 ">
+        <div class="mb-12">
+            <svg class="w-24 h-24 mx-auto mb-6" viewBox="0 0 50 50">
+                <defs>
+                    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--color-accent);stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#ff8533;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <circle cx="25" cy="25" r="20" fill="none" stroke="url(#logoGrad)" stroke-width="2">
+                    <animate attributeName="stroke-dasharray" dur="2s" repeatCount="indefinite"
+                        values="1,150; 90,150; 90,150; 1,150" />
+                    <animate attributeName="stroke-dashoffset" dur="2s" repeatCount="indefinite"
+                        values="0; -35; -124; -159" />
+                </circle>
+                <text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="var(--color-accent)" class="text-3xl font-bold">B</text>
+            </svg>
+            <h1 class="text-5xl font-bold mb-4">Coming Soon</h1>
+            <p class="text-xl mb-8 text-opacity-80">Get ready for the next level of gaming experience</p>
+        </div>
+
+        <!-- Countdown Timer -->
+        <div class="flex justify-center space-x-4 mb-12">
+            <div class="bg-[var(--bg-card)] p-6 rounded-lg w-24 shadow-lg">
+                <div class="text-3xl font-bold text-[var(--color-accent)]" id="days">00</div>
+                <div class="text-opacity-60">Days</div>
+            </div>
+            <div class="bg-[var(--bg-card)] p-6 rounded-lg w-24 shadow-lg">
+                <div class="text-3xl font-bold text-[var(--color-accent)]" id="hours">00</div>
+                <div class="text-opacity-60">Hours</div>
+            </div>
+            <div class="bg-[var(--bg-card)] p-6 rounded-lg w-24 shadow-lg">
+                <div class="text-3xl font-bold text-[var(--color-accent)]" id="minutes">00</div>
+                <div class="text-opacity-60">Minutes</div>
+            </div>
+            <div class="bg-[var(--bg-card)] p-6 rounded-lg w-24 shadow-lg">
+                <div class="text-3xl font-bold text-[var(--color-accent)]" id="seconds">00</div>
+                <div class="text-opacity-60">Seconds</div>
+            </div>
+        </div>
+
+        <!-- Newsletter Form -->
+        <div class="max-w-md mx-auto">
+            <div class="bg-[var(--bg-card)] p-8 rounded-xl shadow-lg">
+                <h3 class="text-xl font-semibold mb-4">Get Notified When We Launch</h3>
+                <form id="notifyForm" class="flex gap-2">
+                    <input type="email" id="emailInput" placeholder="Enter your email"
+                            required 
+                           class="flex-1 bg-[var(--bg-input)] px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] text-black">
+                    <button type="submit" class="bg-[var(--color-accent)] px-6 py-2 rounded-lg hover:opacity-90 transition-opacity">
+                        Notify Me
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Custom Alert Container -->
+        <div id="customAlert" class="fixed top-0 right-0 m-6 transform translate-x-full transition-transform duration-300 ease-in-out">
+            <div class="bg-[var(--bg-card)] border-l-4 border-[var(--color-accent)] p-4 rounded shadow-lg flex items-center gap-3 min-w-[300px]">
+                <div class="flex-shrink-0">
+                    <svg class="alert-icon w-6 h-6" viewBox="0 0 20 20" fill="currentColor"></svg>
+                </div>
+                <p class="alert-message flex-1 text-sm"></p>
+                <button onclick="closeAlert()" class="flex-shrink-0 ml-4 text-gray-400 hover:text-gray-600 transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Social Links -->
+        <div class="mt-12 flex justify-center space-x-6">
+            <a href="#" class="text-opacity-60 hover:text-[var(--color-accent)] transition-colors">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+            </a>
+            <a href="#" class="text-opacity-60 hover:text-[var(--color-accent)] transition-colors">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                </svg>
+            </a>
+            <a href="https://github.com/FANNYMU" class="text-opacity-60 hover:text-[var(--color-accent)] transition-colors">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0C5.374 0 0 5.374 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.626-5.374-12-12-12z"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- Countdown Timer Script -->
+    <script>
+        // Alert handling functions
+        function showAlert(message, type = 'success') {
+            const alertEl = document.getElementById('customAlert');
+            const iconEl = alertEl.querySelector('.alert-icon');
+            const messageEl = alertEl.querySelector('.alert-message');
+
+            // Set icon based on type
+            if (type === 'success') {
+                iconEl.innerHTML = '<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>';
+                iconEl.classList.add('text-green-500');
+                iconEl.classList.remove('text-red-500');
+            } else {
+                iconEl.innerHTML = '<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>';
+                iconEl.classList.add('text-red-500');
+                iconEl.classList.remove('text-green-500');
+            }
+
+            messageEl.textContent = message;
+            alertEl.classList.remove('translate-x-full');
+
+            // Auto-hide after 5 seconds
+            setTimeout(() => closeAlert(), 5000);
+        }
+
+        function closeAlert() {
+            const alertEl = document.getElementById('customAlert');
+            alertEl.classList.add('translate-x-full');
+        }
+
+        // Form submission handling
+        document.getElementById('notifyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('emailInput').value;
+            
+            if (email) {
+                // Here you would typically send this to your backend
+                console.log('Email submitted:', email);
+                showAlert('Thanks! We\'ll notify you when we launch.');
+                this.reset();
+            } else {
+                showAlert('Please enter a valid email address.', 'error');
+            }
+        });
+
+        function updateCountdown() {
+            const launchDate = new Date('2025-06-01T00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
