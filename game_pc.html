@@ -9,18 +9,43 @@
     <script src="/static/js/transitions.js"></script>
     <script src="/static/js/search.js"></script>
     <link rel="shortcut icon" href="/assets/images/logo.svg" type="image/x-icon">
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const topUpButtons = document.querySelectorAll('button');
-            topUpButtons.forEach(button => {
-                if (button.textContent === 'TOP UP') {
+    <script type="module">
+    import gameData from '/static/js/game-data.js';
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.querySelector('input[type="text"]');
+        const gameCards = document.querySelectorAll('.game-card');
+
+        // Add click event listeners to TOP UP buttons
+        const topUpButtons = document.querySelectorAll('button');
+        topUpButtons.forEach(button => {
+            if (button.textContent === 'TOP UP') {
+                const gameCard = button.closest('.game-card');
+                if (gameCard) {
+                    const gameId = gameCard.dataset.gameId;
                     button.addEventListener('click', function() {
-                        window.location.href = '/comming_soon.html';
+                        window.location.href = `/pembayaran.html?game=${gameId}`;
                     });
+                }
+            }
+        });
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+
+            gameCards.forEach(card => {
+                const title = card.querySelector('.font-medium').textContent.toLowerCase();
+                const publisher = card.querySelector('.text-gray-400').textContent.toLowerCase();
+
+                if (title.includes(searchTerm) || publisher.includes(searchTerm)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
                 }
             });
         });
-    </script>
+    });
+</script>
 </head>
 <body class="min-h-screen">
     <header class="bg-[#1a1a2e] py-4 px-6 fixed w-full top-0 z-50">
@@ -41,7 +66,7 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <div class="region w-8 h-8 rounded-full overflow-hidden">
-                        <img src="/assets/images/flag-id.avif" alt="Indonesia flag" class="w-full h-full object-cover">
+                        <img src="/assets/images/flag-id.avif" alt="Indonesia flag" class="w-full h-full object-cover" loading="lazy">
                     </div>
                     <span class="text-white">ID</span>
                 </div>
@@ -59,9 +84,9 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Valorant Card -->
-            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden">
+            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden" data-game-id="valorant">
                 <div class="aspect-square bg-white/10 relative overflow-hidden">
-                    <img src="/assets/images/Valorant.jpg" alt="Valorant" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="/assets/images/Valorant.jpg" alt="Valorant" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                 </div>
                 <div class="p-4">
                     <div class="text-sm text-gray-400">Riot Games</div>
@@ -75,9 +100,9 @@
             </div>
 
             <!-- League of Legends Card -->
-            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden">
+            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden" data-game-id="league-of-legends">
                 <div class="aspect-square bg-white/10 relative overflow-hidden">
-                    <img src="/assets/images/League_of_Legends.jpg" alt="League of Legends" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="/assets/images/League_of_Legends.jpg" alt="League of Legends" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                 </div>
                 <div class="p-4">
                     <div class="text-sm text-gray-400">Riot Games</div>
@@ -91,9 +116,9 @@
             </div>
 
             <!-- Genshin Impact Card -->
-            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden">
+            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden" data-game-id="genshin-impact">
                 <div class="aspect-square bg-white/10 relative overflow-hidden">
-                    <img src="/assets/images/Genshin_Impact.jpg" alt="Genshin Impact" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="/assets/images/Genshin_Impact.jpg" alt="Genshin Impact" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                 </div>
                 <div class="p-4">
                     <div class="text-sm text-gray-400">miHoYo</div>
@@ -107,9 +132,9 @@
             </div>
 
             <!-- Call of Duty Card -->
-            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden">
+            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden" data-game-id="cod-pc">
                 <div class="aspect-square bg-white/10 relative overflow-hidden">
-                    <img src="/assets/images/Call_of_Duty_Mobile.jpg" alt="Call of Duty" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="/assets/images/Call_of_Duty_Mobile.jpg" alt="Call of Duty" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                 </div>
                 <div class="p-4">
                     <div class="text-sm text-gray-400">Activision</div>
@@ -123,9 +148,9 @@
             </div>
 
             <!-- Overwatch 2 Card -->
-            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden">
+            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden" data-game-id="overwatch-2">
                 <div class="aspect-square bg-white/10 relative overflow-hidden">
-                    <img src="/assets/images/Overwatch.jpg" alt="Overwatch 2" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="/assets/images/Overwatch.jpg" alt="Overwatch 2" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                 </div>
                 <div class="p-4">
                     <div class="text-sm text-gray-400">Blizzard Entertainment</div>
@@ -139,9 +164,9 @@
             </div>
 
             <!-- World of Warcraft Card -->
-            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden">
+            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden" data-game-id="world-of-warcraft">
                 <div class="aspect-square bg-white/10 relative overflow-hidden">
-                    <img src="/assets/images/WOF.jpg" alt="World of Warcraft" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="/assets/images/WOF.jpg" alt="World of Warcraft" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                 </div>
                 <div class="p-4">
                     <div class="text-sm text-gray-400">Blizzard Entertainment</div>
@@ -155,9 +180,9 @@
             </div>
 
             <!-- Dota 2 Card -->
-            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden">
+            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden" data-game-id="dota-2">
                 <div class="aspect-square bg-white/10 relative overflow-hidden">
-                    <img src="/assets/images/Dota.jpg" alt="Dota 2" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="/assets/images/Dota.jpg" alt="Dota 2" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                 </div>
                 <div class="p-4">
                     <div class="text-sm text-gray-400">Valve</div>

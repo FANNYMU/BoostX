@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BoostX - Payment</title>
+    <link rel="shortcut icon" href="./assets/images/logo.svg" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="stylesheet" href="./static/css/pembayaran.css">
+    <script src="./static/js/transitions.js"></script>
+</head>
+<body class="min-h-screen bg-[#0f0f1e] bg-cover bg-fixed bg-center before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-br from-[#0f0f1e]/90 via-[#0f0f1e]/75 to-[#0f0f1e]/90 before:backdrop-blur-xl lg:overflow-hidden">
+    <div id="dynamic-bg" class="absolute inset-0 -z-10 opacity-500 transition-opacity duration-500">
+        <img src="./assets/images/mobile_legends.jpg" alt="">
+    </div>
+    <div class="relative z-10">
+    <header class="bg-[#1a1a2e] py-4 px-6 fixed w-full top-0 z-50">
+        <nav class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="/index.html" class="logo w-24 h-8">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 32" class="w-full h-full">
+                        <text x="0" y="24" fill="white" font-family="Arial" font-weight="bold" font-size="24">
+                            Boost<tspan fill="#ff6b00">X</tspan>
+                        </text>
+                    </svg>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 pt-24 pb-8">
+        <div class="max-w-2xl mx-auto bg-white/5 backdrop-blur-md border border-white/10 rounded-lg p-6 shadow-xl transition-all duration-300 hover:bg-white/10">
+            <div class="game-info mb-6">
+                <h1 id="game-title" class="text-2xl text-white font-bold mb-2">Loading...</h1>
+                <p id="game-publisher" class="text-gray-400">Loading...</p>
+            </div>
+
+            <div class="payment-options space-y-4">
+                <h2 class="text-xl text-white font-semibold mb-4">Select Top Up Amount</h2>
+                <div id="top-up-options" class="grid grid-cols-2 gap-4 transition-all duration-300">
+                    <!-- Top up options will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="payment-form mt-8">
+                <h2 class="text-xl text-white font-semibold mb-4">Payment Details</h2>
+                <form id="payment-form" class="space-y-4">
+                    <div>
+                        <label for="user-id" class="block text-white mb-2">User ID</label>
+                        <input type="text" id="user-id" class="w-full bg-white/5 backdrop-blur-sm border border-white/10 text-white rounded-lg px-4 py-2 transition-all duration-300 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-orange-500/50" required>
+                    </div>
+                    <div>
+                        <label for="server-id" class="block text-white mb-2">Server ID (if applicable)</label>
+                        <input type="text" id="server-id" class="w-full bg-white/5 backdrop-blur-sm border border-white/10 text-white rounded-lg px-4 py-2 transition-all duration-300 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-orange-500/50">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-white mb-2">Email</label>
+                        <input type="email" id="email" class="w-full bg-white/5 backdrop-blur-sm border border-white/10 text-white rounded-lg px-4 py-2 transition-all duration-300 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-orange-500/50" required>
+                    </div>
+                    <button type="submit" class="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 rounded-lg font-semibold shadow-lg transition-all duration-300 hover:shadow-orange-500/25 hover:scale-[1.02] active:scale-[0.98]">
+                        Proceed to Payment
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+    </div>
+
+    <script type="module">
+        import gameData from './static/js/game-data.js';
+
+        // Function to set dynamic background
+        // function setDynamicBackground(game) {
+        //     const bgElement = document.getElementById('dynamic-bg');
+        //     const imagePath = game.backgroundImage || game.image;
+        //     const imageUrl = `./assets/images/${imagePath}`;
+
+        //     // Create new image object for preloading
+        //     const img = new Image();
+            
+        //     // Set up success handler
+        //     img.onload = () => {
+        //         bgElement.style.backgroundImage = `url(${imageUrl})`;
+        //         bgElement.style.backgroundSize = 'cover';
+        //         bgElement.style.backgroundPosition = 'center';
+        //         bgElement.style.opacity = '0.4';
+        //     };
+
+        //     // Set up error handler
+        //     img.onerror = () => {
+        //         console.error(`Failed to load background image: ${imagePath}`);
+        //         bgElement.style.opacity = '0';
+        //         // Set fallback background color
+        //         bgElement.style.backgroundColor = '#0f0f1e';
+        //     };
+
+        //     // Start loading the image
+        //     img.src = imageUrl;
+        // }
+
+        // Get game ID from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const gameId = urlParams.get('game');
+
+        if (!gameId || !gameData[gameId]) {
+            window.location.href = './index.html';
+        }
+
+        const game = gameData[gameId];
+
+        // Update page content with game data
+        document.getElementById('game-title').textContent = game.name;
+        document.getElementById('game-publisher').textContent = game.publisher;
+
+        // Populate top-up options
+        const topUpOptionsContainer = document.getElementById('top-up-options');
+        game.topUpOptions.forEach(option => {
+            const optionElement = document.createElement('div');
+            optionElement.className = 'bg-white/5 backdrop-blur-sm border border-white/10 p-4 rounded-lg cursor-pointer transition-all duration-300 hover:bg-white/10 hover:scale-[1.02] hover:shadow-lg hover:shadow-orange-500/10';
+            optionElement.innerHTML = `
+                <div class="text-white text-lg">${option.amount}</div>
+                <div class="text-orange-500">${option.price}</div>
+            `;
+            topUpOptionsContainer.appendChild(optionElement);
+        });
+
+        // Handle form submission
+        document.getElementById('payment-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Here you would typically handle the payment processing
+            alert('Payment processing will be implemented in the future.');
+        });
+    </script>
+</body>
+</html>

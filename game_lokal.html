@@ -9,18 +9,43 @@
     <script src="/static/js/transitions.js"></script>
     <script src="/static/js/search.js"></script>
     <link rel="shortcut icon" href="/assets/images/logo.svg" type="image/x-icon">
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const topUpButtons = document.querySelectorAll('button');
-            topUpButtons.forEach(button => {
-                if (button.textContent === 'TOP UP') {
+    <script type="module">
+    import gameData from '/static/js/game-data.js';
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.querySelector('input[type="text"]');
+        const gameCards = document.querySelectorAll('.game-card');
+
+        // Add click event listeners to TOP UP buttons
+        const topUpButtons = document.querySelectorAll('button');
+        topUpButtons.forEach(button => {
+            if (button.textContent === 'TOP UP') {
+                const gameCard = button.closest('.game-card');
+                if (gameCard) {
+                    const gameId = gameCard.dataset.gameId;
                     button.addEventListener('click', function() {
-                        window.location.href = '/comming_soon.html';
+                        window.location.href = `/pembayaran.html?game=${gameId}`;
                     });
+                }
+            }
+        });
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+
+            gameCards.forEach(card => {
+                const title = card.querySelector('.font-medium').textContent.toLowerCase();
+                const publisher = card.querySelector('.text-gray-400').textContent.toLowerCase();
+
+                if (title.includes(searchTerm) || publisher.includes(searchTerm)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
                 }
             });
         });
-    </script>
+    });
+</script>
 </head>
 <body class="min-h-screen">
     <header class="bg-[#1a1a2e] py-4 px-6 fixed w-full top-0 z-50">
@@ -41,7 +66,7 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <div class="region w-8 h-8 rounded-full overflow-hidden">
-                        <img src="/assets/images/flag-id.avif" alt="Indonesia flag" class="w-full h-full object-cover">
+                        <img src="/assets/images/flag-id.avif" alt="Indonesia flag" class="w-full h-full object-cover" loading="lazy">
                     </div>
                     <span class="text-white">ID</span>
                 </div>
@@ -59,9 +84,9 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Dragon Nest Card -->
-            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden">
+            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden" data-game-id="dragon-nest">
                 <div class="aspect-square bg-white/10 relative overflow-hidden">
-                    <img src="/assets/images/DragonNest.jpg" alt="Dragon Nest" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="/assets/images/DragonNest.jpg" alt="Dragon Nest" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                 </div>
                 <div class="p-4">
                     <div class="text-sm text-gray-400">Tencent</div>
@@ -75,9 +100,9 @@
             </div>
 
             <!-- Metal Slug Card -->
-            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden">
+            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden" data-game-id="metal-slug">
                 <div class="aspect-square bg-white/10 relative overflow-hidden">
-                    <img src="/assets/images/Metal_Slug.jpg" alt="Metal Slug" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="/assets/images/Metal_Slug.jpg" alt="Metal Slug" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                 </div>
                 <div class="p-4">
                     <div class="text-sm text-gray-400">VNGGAMES</div>
@@ -91,9 +116,9 @@
             </div>
 
             <!-- Ragnarok Online Card -->
-            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden">
+            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden" data-game-id="ragnarok-online">
                 <div class="aspect-square bg-white/10 relative overflow-hidden">
-                    <img src="/assets/images/Ragnarok2.jpg" alt="Ragnarok Online" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="/assets/images/Ragnarok2.jpg" alt="Ragnarok Online" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                 </div>
                 <div class="p-4">
                     <div class="text-sm text-gray-400">Gravity</div>
@@ -107,9 +132,9 @@
             </div>
 
             <!-- Point Blank Card -->
-            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden">
+            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden" data-game-id="point-blank">
                 <div class="aspect-square bg-white/10 relative overflow-hidden">
-                    <img src="/assets/images/Point_Blank2.jpg" alt="Point Blank" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="/assets/images/Point_Blank2.jpg" alt="Point Blank" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                 </div>
                 <div class="p-4">
                     <div class="text-sm text-gray-400">Zepetto</div>
@@ -123,9 +148,9 @@
             </div>
 
             <!-- Lost Saga Card -->
-            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden">
+            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden" data-game-id="lost-saga">
                 <div class="aspect-square bg-white/10 relative overflow-hidden">
-                    <img src="/assets/images/Lost_Saga2.jpg" alt="Lost Saga" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="/assets/images/Lost_Saga2.jpg" alt="Lost Saga" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                 </div>
                 <div class="p-4">
                     <div class="text-sm text-gray-400">Gemscool</div>
@@ -139,9 +164,9 @@
             </div>
 
             <!-- Dreadout Card -->
-            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden">
+            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden" data-game-id="dreadout">
                 <div class="aspect-square bg-white/10 relative overflow-hidden">
-                    <img src="/assets/images/Dreadout.jpg" alt="Dreadout" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="/assets/images/Dreadout.jpg" alt="Dreadout" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                 </div>
                 <div class="p-4">
                     <div class="text-sm text-gray-400">Digital Happiness</div>
@@ -155,9 +180,9 @@
             </div>
 
             <!-- Pamali Card -->
-            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden">
+            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden" data-game-id="pamali">
                 <div class="aspect-square bg-white/10 relative overflow-hidden">
-                    <img src="/assets/images/Pamali.jpg" alt="Pamali" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="/assets/images/Pamali.jpg" alt="Pamali" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                 </div>
                 <div class="p-4">
                     <div class="text-sm text-gray-400">StoryTale Studios</div>
@@ -171,9 +196,9 @@
             </div>
 
             <!-- Celestian Tales Card -->
-            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden">
+            <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden" data-game-id="celestian-tales">
                 <div class="aspect-square bg-white/10 relative overflow-hidden">
-                    <img src="/assets/images/CT.jpg" alt="Celestian Tales" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="/assets/images/CT.jpg" alt="Celestian Tales" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                 </div>
                 <div class="p-4">
                     <div class="text-sm text-gray-400">Ekuator Games</div>
@@ -189,7 +214,7 @@
             <!-- Coffee Talk Card -->
             <div class="game-card bg-[#1a1a2e] rounded-xl overflow-hidden">
                 <div class="aspect-square bg-white/10 relative overflow-hidden">
-                    <img src="/assets/images/Coffee_Talk.jpg" alt="Coffee Talk" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="/assets/images/Coffee_Talk.jpg" alt="Coffee Talk" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                 </div>
                 <div class="p-4">
                     <div class="text-sm text-gray-400">Toge Productions</div>
