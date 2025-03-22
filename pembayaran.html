@@ -11,9 +11,6 @@
     <script src="./static/js/transitions.js"></script>
 </head>
 <body class="min-h-screen bg-[#0f0f1e] bg-cover bg-fixed bg-center before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-br from-[#0f0f1e]/90 via-[#0f0f1e]/75 to-[#0f0f1e]/90 before:backdrop-blur-xl lg:overflow-auto">
-    <div id="dynamic-bg" class="absolute inset-0 -z-10 opacity-500 transition-opacity duration-500">
-        <img src="./assets/images/mobile_legends.jpg" alt="">
-    </div>
     <div class="relative z-10">
     <header class="bg-[#1a1a2e] py-4 px-6 fixed w-full top-0 z-50">
         <nav class="flex items-center justify-between">
@@ -70,34 +67,33 @@
     <script type="module">
         import gameData from './static/js/game-data.js';
 
-        // Function to set dynamic background
-        // function setDynamicBackground(game) {
-        //     const bgElement = document.getElementById('dynamic-bg');
-        //     const imagePath = game.backgroundImage || game.image;
-        //     const imageUrl = `./assets/images/${imagePath}`;
-
-        //     // Create new image object for preloading
-        //     const img = new Image();
+        // Function to set static background
+        function setStaticBackground(game) {
+            const imagePath = game.backgroundImage || game.image;
+            const imageUrl = `./assets/images/${imagePath}`;
             
-        //     // Set up success handler
-        //     img.onload = () => {
-        //         bgElement.style.backgroundImage = `url(${imageUrl})`;
-        //         bgElement.style.backgroundSize = 'cover';
-        //         bgElement.style.backgroundPosition = 'center';
-        //         bgElement.style.opacity = '0.4';
-        //     };
+            // Create new image object for preloading
+            const img = new Image();
+            
+            // Set up success handler
+            img.onload = () => {
+                // Apply background to body with fixed position
+                document.body.style.backgroundImage = `url(${imageUrl})`;
+                document.body.style.backgroundSize = 'cover';
+                document.body.style.backgroundPosition = 'center';
+                document.body.style.backgroundAttachment = 'fixed'; // This ensures the background doesn't scroll
+            };
 
-        //     // Set up error handler
-        //     img.onerror = () => {
-        //         console.error(`Failed to load background image: ${imagePath}`);
-        //         bgElement.style.opacity = '0';
-        //         // Set fallback background color
-        //         bgElement.style.backgroundColor = '#0f0f1e';
-        //     };
+            // Set up error handler
+            img.onerror = () => {
+                console.error(`Failed to load background image: ${imagePath}`);
+                // Set fallback background color
+                document.body.style.backgroundColor = '#0f0f1e';
+            };
 
-        //     // Start loading the image
-        //     img.src = imageUrl;
-        // }
+            // Start loading the image
+            img.src = imageUrl;
+        }
 
         // Get game ID from URL parameters
         const urlParams = new URLSearchParams(window.location.search);
@@ -108,6 +104,9 @@
         }
 
         const game = gameData[gameId];
+
+        // Set the static background
+        setStaticBackground(game);
 
         // Update page content with game data
         document.getElementById('game-title').textContent = game.name;
